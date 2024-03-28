@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <style>
+        /* Your custom CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+        }
+        .error-message {
+            font-size: 24px;
+            color: #dc3545; /* Red color for error message */
+            margin-bottom: 20px;
+        }
+        .back-link {
+            color: #007bff; /* Blue color for link */
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-message">
+        <p>Oops! Something went wrong.</p>
+        <p>{{ error_message }}</p>
+    </div>
+    <a href="/" class="back-link">Back to Home</a>
+</body>
+</html>

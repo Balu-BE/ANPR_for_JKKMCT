@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Upload and Player</title>
+<style>
+  /* Your CSS styles here */
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    /* background-color: #00DBDE;
+    background-image: linear-gradient(90deg, #00DBDE 50%, #FC00FF 100%); */
+    background: hsla(277, 79%, 84%, 1);
+    background: linear-gradient(90deg, hsla(277, 79%, 84%, 1) 0%, hsla(204, 95%, 77%, 1) 100%);
+    background: -moz-linear-gradient(90deg, hsla(277, 79%, 84%, 1) 0%, hsla(204, 95%, 77%, 1) 100%);
+    background: -webkit-linear-gradient(90deg, hsla(277, 79%, 84%, 1) 0%, hsla(204, 95%, 77%, 1) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#DDB4F6", endColorstr="#8DD0FC", GradientType=1 );
+  }
+
+  .header {
+    color: #FFFFFF;
+    font-size: 2em;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .content-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 40%;
+    margin-top: 5px;
+  }
+
+  .upload-container,
+  .video-player {
+    flex: 1;
+    /* padding: 50px; */
+    border-radius: 10px;
+    background-color: #eee;
+  }
+
+  .upload-box {
+    border: 2px dashed #D3D3D3;
+    border-radius: 10px;
+    margin: 50px;
+    padding: 50px;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .upload-button {
+    padding: 15px 30px;
+    background-color: #00DBDE;
+    background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 1em;
+    display: block;
+    margin: 20px auto;
+  }
+
+  .video-player {
+    background-color: #000;
+    color: #fff;
+  }
+
+  #video-player {
+    width: 100%;
+  }
+</style>
+</head>
+
+<body>
+  <header class="header">
+    <h1>Video Recognize</h1>
+  </header>
+  <div class="content-container">
+    <div class="upload-container">
+      <div class="upload-box">
+        <i class="fas fa-cloud-upload-alt fa-4x"></i>
+        <br>
+        <span class="text">Drop files here</span>
+        <br>
+        <span class="text">(or click to select)</span>
+        <div id="uploadStatus"></div> <!-- Upload status message -->
+      </div>
+      <button class="upload-button">Upload from Device</button>
+
+      <!-- <input type="file" id="fileInput" style="display: none;">
+    <label for="fileInput" class="upload-button">Upload from Device</label> -->
+    </div>
+    <!-- <div class="video-player">
+      <h2>Video Player</h2>
+      <video id="video-player" width="100%" controls></video>
+    </div> -->
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () { 
+      console.log('DOMContentLoaded');
+      const uploadButton = document.querySelector('.upload-button');
+      const uploadStatus = document.getElementById('uploadStatus');
+      const videoPlayer = document.getElementById('video-player');
+  
+      uploadButton.addEventListener('click', function () {
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = 'video/*';
+        fileInput.onchange = function (event) {
+          const file = event.target.files[0];
+          if (file) {
+            uploadFile(file);
+          }
+        };
+        fileInput.click();
+      });
+  
+      function uploadFile(file) {
+        const formData = new FormData();
+        formData.append('file', file);
+  
+        fetch('/upload', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success && data.file_path) {
+            videoPlayer.src = data.file_path; // Set the uploaded video source
+            videoPlayer.load(); // Load the video
+            uploadStatus.textContent = 'Video uploaded successfully.'; // Update upload status message
+          } else {
+            console.error('Error uploading file:', data.error);
+            uploadStatus.textContent = 'Error uploading file. Please try again.'; // Update upload status message on error
+          }
+        })
+        .catch(error => {
+          console.error('Error uploading file:', error);
+          uploadStatus.textContent = 'Error uploading file. Please try again.'; // Update upload status message on error
+        });
+      }
+    });
+ 
+  </script>
+</body>
+
+</html>

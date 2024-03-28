@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automatic Number Plate Recognition</title>
+  <link rel="stylesheet" href="../static/style.css"> 
+</head>
+
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>AUTOMATIC NUMBER PLATE RECOGNITION</h1> </header>
+
+    <section class="hero">
+      <div class="hero-text">
+        <h2>JKK Munirajah College of Technology</h2>
+        <p>Our AI-powered system automates license plate recognition, bringing efficiency and security to your parking management.</p>
+      </div>
+      <div class="hero-buttons">
+        <button onclick="LiveRecognize()" class="cta primary">Live Recognize</button>
+        <!-- <button onclick="runVideoRecognize()" class="cta secondary">Video Recognize</button> -->
+        <form action="/videoupload" method="GET">
+          <input type="hidden" name="load_dom" value="true">
+          <button class="cta secondary" type="submit">Video Recognize</button>
+        </form>
+    </section>
+    <button onclick="runDashboard()" class="dashboard-btn">Dashboard</button> 
+ </div>
+ <script>
+ function LiveRecognize() {
+  fetch('/runcode', {
+      method: 'POST',
+      body: JSON.stringify({ script: 'LiveRecognize.py' }),
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  })
+  .then(response => response.json())
+  .then(data => {
+  console.log(data.message);  // Log the server response message
+  })
+  .catch(error => console.error('Error:', error));
+}
+
+function runDashboard() {
+fetch('/dashboard')
+.then(response => response.text())
+.then(html => {
+document.body.innerHTML = html;
+})
+.catch(error => console.error('Error:', error));
+}
+
+function runVideoRecognize() {
+fetch('/videoupload')
+.then(response => response.text())
+.then(html => {
+document.body.innerHTML = html;
+})
+.catch(error => console.error('Error:', error));
+}
+</script>
+  </body>
+
+</html>

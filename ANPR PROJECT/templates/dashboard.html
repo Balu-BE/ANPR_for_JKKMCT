@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <h1>AUTOMATIC NUMBER PLATE DETECTION AND RECOGNITION</h1>
+ <style>
+   body {
+    background-color: #031d74; /* Dark gray background */
+    font-family: Arial, sans-serif;
+    color: #FFFFFF; /* White text */
+}
+
+h1 {
+    text-align: center;
+    color: #00BFFF; /* Deep sky blue heading */
+    font-size: 2em; /* Increase heading size */
+    margin-bottom: 15px; /* Add some margin */
+    background: linear-gradient(74deg,var(--bard-color-brand-text-gradient-stop-1) 0,var(--bard-color-brand-text-gradient-stop-2) 9%,var(--bard-color-brand-text-gradient-stop-3) 20%,var(--bard-color-brand-text-gradient-stop-3) 24%,var(--bard-color-brand-text-gradient-stop-2) 35%,var(--bard-color-brand-text-gradient-stop-1) 44%,var(--bard-color-brand-text-gradient-stop-2) 50%,var(--bard-color-brand-text-gradient-stop-3) 56%,var(--bard-color-surface) 75%,var(--bard-color-surface) 100%);
+}
+
+h2 {
+    text-align: center;
+    color: #FFFFFF; /* Lime green heading */
+    margin-top: 20px; /* Adjust margin */
+}
+
+table {
+    width: 80%; /* Adjust width as needed */
+    border-collapse: collapse; /* Separate borders for curvy edges */
+    border-spacing: 5px;
+    background-color: transparent; /* Transparent table background */
+    /* border-radius: 50px; Rounded corners */
+    border: none; /* Blue border */
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin: 0 auto; /* Center the table horizontally */
+    border-top-right-radius: 10px; 
+    
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    /*border-bottom: 2px solid lightgray; */
+     border-radius: 0px; 
+
+}
+
+th {
+    background-color: #00BFFF; /* Dark blue header background */
+    color: #ffffff; /* White header text */
+    font-weight: bold; /* Bold headers */ /*Rounded top corners */
+    margin-bottom: 10px; 
+}
+
+tr:nth-child(even) {
+    background-color: #e0f2ff; /* Light blue alternate row color */
+    color: #333333;
+}
+
+tr:nth-child(odd) {
+    background-color: #e0f2ff; /* White alternate row color */
+    color: #333333;
+}
+
+.status-in, .status-out {
+    display: inline-block;
+    padding: 5px 25px;
+    border-radius: 15px;
+    
+}
+
+.status-in {
+    background-color: rgba(220, 53, 69, 0.5); /* Red transparent background */
+    color: #DC3545; /* Red text */
+}
+
+.status-out {
+    background-color: rgba(41, 171, 135, 0.5); /* Green transparent background */
+    color: #1E4620; /* Green text */
+}
+
+</style>    
+</head>
+<body>
+    
+    <h2>Dashboard</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Vehicle Number</th>
+                <th>Entry Time</th>
+                <th>Exit Time</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+            <tr>
+                <td>{{ record.id }}</td>
+                <td>{{ record.plate_number }}</td>
+                <td>{{ record.entry_time }}</td>
+                <td>{{ record.exit_time }}</td>
+                <td>
+                  <span class="{% if record.status == 'in' %} status-in {% else %} status-out {% endif %}">
+                    {{ record.status }}
+                  </span>
+                </td>
+              </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</body>
+</html>
