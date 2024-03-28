@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5; /* Light background */
+    min-height: 100vh; /* Set minimum viewport height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 5px 0; /* Add top and bottom padding */
+  }
+  
+  .header {
+    color: #3AA7FF; /* Gemini AI heading color */
+    font-size: 1.5em;
+    margin-bottom: 50px; /* Add more space below heading */
+    
+  }
+  
+  .hero {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero-text {
+    padding: 50px; /* Add padding for content */
+    color: #333; /* Dark text color */
+  }
+  
+  .hero-text h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    
+  }
+  
+  .hero-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Add space below text */
+  }
+  
+  .cta {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .cta.primary {
+    background-color: #3AA7FF; /* Primary button color */
+    color: #fff;
+    font-size: 1.5em; /* White text color */
+  }
+  
+  .cta.primary:hover {
+    background-color: #2980B9; /* Darker shade on hover */
+  }
+  
+  .cta.secondary {
+    background-color: #3AA7FF;
+    color: #fff; /* Dark text color */
+    border: 1px solid #ddd;
+    margin-left: 100px; /* Add margin between buttons */
+    font-size: 1.5em;
+  }
+  
+  .cta.secondary:hover {
+    background-color: #2980B9; /* Light gray on hover */
+  }
+  
+  .dashboard-btn {
+    background-color: #FFE53B;
+    background-image: linear-gradient(147deg, #FFE53B 0%, #FF2525 74%);
+    color: #fff;
+    margin-top: 30px; /* More space above dashboard button */
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5em;
+    transition: all 0.3s ease;
+  }
+  
+  .dashboard-btn:hover {
+    background-color: #2980B9; 
+    cursor: pointer;
+  }
